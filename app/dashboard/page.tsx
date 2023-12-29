@@ -1,9 +1,17 @@
+import { userSession } from "@/actions/user-session";
 import { BusinessOverview } from "@/components/business-overview";
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UsersOverview } from "@/components/users-overview";
+import { redirect } from "next/navigation";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const {
+    data: { session },
+  } = await userSession();
+  if (!session) {
+    redirect("/login");
+  }
   return (
     <div className="flex-1 w-full space-y-4 p-8 pt-6">
       <div className="flex items-center justify-between space-y-2">

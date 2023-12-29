@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { error } from "console";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -27,6 +27,7 @@ type LoginType = z.infer<typeof loginSchema>;
 
 export function SignInForm() {
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<LoginType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -36,14 +37,17 @@ export function SignInForm() {
   });
 
   const onSubmit = async (values: LoginType) => {
-    const { error } = await signInWihEmailAndPassword(values);
+    const { error, data } = await signInWihEmailAndPassword(values);
     if (error?.message) {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: error.message,
       });
+    } else {
+      router.push("/dashboard");
     }
+    console.log({ data });
   };
   return (
     <Form {...form}>
