@@ -15,14 +15,12 @@ export async function createNewUser(data: { email: string; role: RoleType }) {
     symbols: true,
   });
   console.log({ password });
-  const result = await supabase.auth.signUp({
+
+  const result = await supabase.auth.admin.createUser({
     email: data.email,
     password,
-    options: {
-      data: {
-        role: data.role,
-      },
-    },
+    user_metadata: { user_role: data.role },
+    email_confirm: true,
   });
   revalidatePath("/users");
   // !!if user is created mail this to the user

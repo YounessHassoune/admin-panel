@@ -30,7 +30,6 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   filterColumn: keyof TData;
   newHref: string;
-  actionBtnVisible: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -38,7 +37,6 @@ export function DataTable<TData, TValue>({
   data,
   filterColumn,
   newHref,
-  actionBtnVisible
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -47,9 +45,6 @@ export function DataTable<TData, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
-
-  console.log(actionBtnVisible);
-  
 
   const table = useReactTable({
     data,
@@ -79,7 +74,6 @@ export function DataTable<TData, TValue>({
         table={table}
         filterColumn={filterColumn}
         newHref={newHref}
-        actionBtnVisible={actionBtnVisible}
       />
       <div className="rounded-md border">
         <Table>

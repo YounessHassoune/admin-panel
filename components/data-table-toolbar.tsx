@@ -13,20 +13,16 @@ interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   filterColumn: keyof TData;
   newHref: string;
-  actionBtnVisible: boolean;
 }
 
 export function DataTableToolbar<TData>({
   table,
   filterColumn,
   newHref,
-  actionBtnVisible,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
   const isAdmin = useAdmin();
-
-  console.log({ actionBtnVisible });
-
+  
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">

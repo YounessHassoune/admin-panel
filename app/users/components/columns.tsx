@@ -13,9 +13,11 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="ID" />
     ),
-    cell: ({ row }) => <div className="w-[80px] truncate">{row.getValue("id")}</div>,
+    cell: ({ row }) => (
+      <div className="w-[80px] truncate">{row.getValue("id")}</div>
+    ),
     enableHiding: false,
-    enableSorting:false
+    enableSorting: false,
   },
   {
     accessorKey: "email",
@@ -35,7 +37,9 @@ export const columns: ColumnDef<User>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <span className="truncate font-medium">{row.getValue("role")}</span>
+        <span className="truncate font-medium">
+          {row.getValue("role")}
+        </span>
       );
     },
     filterFn: (row, id, value) => {

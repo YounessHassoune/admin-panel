@@ -7,18 +7,14 @@ export async function getUsers() {
   const cookieStore = cookies();
   const supabase = await createClient(cookieStore);
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  const isAdmin = session?.user?.user_metadata?.role === "Admin";
-  console.log({isAdmin});
-  if (isAdmin) {
-    const result = await supabase
-      .from("profile")
-      .select("*")
-      .eq("role", "Admin");
-    return result;
-  } else {
-    const result = await supabase.from("profile").select("*");
-    return result;
-  }
+    data: { users },
+  } = await supabase.auth.admin.listUsers();
+
+  const transformedUsers = users.map((user) => ({
+    id: user.id,
+    email: user.email!,
+    role: user.user_metadata?.user_role ?? "SuperAdmin",
+    lastSignIn: user.last_sign_in_at ? new Date(user.last_sign_in_at) : null,
+  }));
+  return transformedUsers;
 }

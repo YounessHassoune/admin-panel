@@ -1,6 +1,5 @@
 import { DataTable } from "@/components/data-table";
 import { columns } from "./components/columns";
-import { User } from "./data/schema";
 import { userSession } from "@/actions/user-session";
 import { getUsers } from "@/actions/get-users";
 import { redirect } from "next/navigation";
@@ -13,7 +12,7 @@ export default async function Users() {
     redirect("/login");
   }
 
-  const { data }: { data: User[] | null } = await getUsers();
+  const users = await getUsers();
 
   return (
     <div className="flex-1 w-full space-y-4 p-8 pt-6">
@@ -21,7 +20,7 @@ export default async function Users() {
         <h2 className="text-3xl font-bold tracking-tight">Users</h2>
       </div>
       <DataTable
-        data={data || []}
+        data={users}
         columns={columns}
         filterColumn="email"
         newHref="/users/new"

@@ -11,7 +11,7 @@ const useAdmin = () => {
         const {
           data: { session },
         } = await supabase.auth.getSession();
-        const userRole = session?.user?.user_metadata?.role;
+        const userRole = session?.user?.user_metadata?.user_role;
         setIsAdmin(userRole === "Admin");
       } catch (err) {
         console.error("Error checking admin status:", err);
