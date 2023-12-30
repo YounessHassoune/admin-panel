@@ -15,7 +15,6 @@ export async function createNewUser(data: { email: string; role: RoleType }) {
     symbols: true,
   });
   console.log({ password });
-
   const result = await supabase.auth.admin.createUser({
     email: data.email,
     password,

@@ -1,4 +1,5 @@
 import { userSession } from "@/actions/user-session";
+import { getUsersOverview } from "@/actions/users-overview";
 import { BusinessOverview } from "@/components/business-overview";
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +13,9 @@ export default async function Dashboard() {
   if (!session) {
     redirect("/login");
   }
+
+  const usersOverview = await getUsersOverview();
+
   return (
     <div className="flex-1 w-full space-y-4 p-8 pt-6">
       <div className="flex items-center justify-between space-y-2">
@@ -32,7 +36,7 @@ export default async function Dashboard() {
             <CardTitle>Users</CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
-            <UsersOverview />
+            <UsersOverview data={usersOverview} />
           </CardContent>
         </Card>
       </div>
