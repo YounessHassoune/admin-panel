@@ -65,9 +65,7 @@ export function NewBusinessForm() {
     // Append each file to FormData
     formData.append("image", values.image[0]);
 
-    const { data, error } = await createNewBusiness(formData);
-    console.log(error);
-
+    const { error } = await createNewBusiness(formData);
     if (error?.message) {
       toast({
         variant: "destructive",
@@ -103,8 +101,9 @@ export function NewBusinessForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full  space-y-8"
       >
-        {form.formState.isValid &&
-          form.formState.isDirty &&
+        {form.formState.dirtyFields.image &&
+          form.formState.touchedFields.image &&
+          form.formState.isValid &&
           preview.length > 0 && (
             <Avatar className="w-24 h-24 mx-auto mt-4">
               <AvatarImage src={preview} />
