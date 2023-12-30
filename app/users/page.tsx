@@ -3,7 +3,6 @@ import { columns } from "./components/columns";
 import { User } from "./data/schema";
 import { userSession } from "@/actions/user-session";
 import { getUsers } from "@/actions/get-users";
-
 import { redirect } from "next/navigation";
 
 export default async function Users() {

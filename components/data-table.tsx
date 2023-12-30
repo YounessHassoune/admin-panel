@@ -27,17 +27,19 @@ import { DataTableToolbar } from "@/components/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[] ;
+  data: TData[];
   filterColumn: keyof TData;
-  newHref:string
+  newHref: string;
+  actionBtnVisible: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   filterColumn,
-  newHref
-}: DataTableProps<TData , TValue>) {
+  newHref,
+  actionBtnVisible
+}: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -45,6 +47,9 @@ export function DataTable<TData, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  console.log(actionBtnVisible);
+  
 
   const table = useReactTable({
     data,
@@ -70,7 +75,12 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} filterColumn={filterColumn} newHref={newHref} />
+      <DataTableToolbar
+        table={table}
+        filterColumn={filterColumn}
+        newHref={newHref}
+        actionBtnVisible={actionBtnVisible}
+      />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

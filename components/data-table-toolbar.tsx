@@ -7,19 +7,25 @@ import { XIcon, UserPlusIcon } from "lucide-react";
 import { DataTableViewOptions } from "@/components/data-table-view-options";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import useAdmin from "@/hooks/use-admin";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   filterColumn: keyof TData;
   newHref: string;
+  actionBtnVisible: boolean;
 }
 
 export function DataTableToolbar<TData>({
   table,
   filterColumn,
   newHref,
+  actionBtnVisible,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
+  const isAdmin = useAdmin();
+
+  console.log({ actionBtnVisible });
 
   return (
     <div className="flex items-center justify-between">
@@ -39,10 +45,12 @@ export function DataTableToolbar<TData>({
           className="h-8 w-[150px] lg:w-[250px]"
         />
 
-        <Link href={newHref} className={cn(buttonVariants(), "flex gap-2")}>
-          <UserPlusIcon className=" h-4 w-4" />
-          New User
-        </Link>
+        {!isAdmin && (
+          <Link href={newHref} className={cn(buttonVariants(), "flex gap-2")}>
+            <UserPlusIcon className=" h-4 w-4" />
+            New User
+          </Link>
+        )}
 
         {isFiltered && (
           <Button
