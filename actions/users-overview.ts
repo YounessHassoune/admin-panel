@@ -1,6 +1,6 @@
 "use server";
 
-import { Count } from "@/components/users-overview";
+import { Count } from "@/constants";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 
