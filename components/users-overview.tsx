@@ -4,7 +4,6 @@ import { UsersOverviewProps } from "@/constants";
 import { useState } from "react";
 import { Pie, PieChart, ResponsiveContainer, Sector } from "recharts";
 
-
 export function UsersOverview({ data }: UsersOverviewProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = (_: unknown, index: number) => {
