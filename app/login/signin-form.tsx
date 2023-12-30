@@ -37,17 +37,14 @@ export function SignInForm() {
   });
 
   const onSubmit = async (values: LoginType) => {
-    const { error, data } = await signInWihEmailAndPassword(values);
+    const { error } = await signInWihEmailAndPassword(values);
     if (error?.message) {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: error.message,
       });
-    } else {
-      router.push("/dashboard");
     }
-    console.log({ data });
   };
   return (
     <Form {...form}>

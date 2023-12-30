@@ -3,11 +3,20 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { User } from "../data/schema";
 import { DataTableColumnHeader } from "@/components/data-table-column-header";
-import { TrashIcon } from "lucide-react";
 import { format } from "date-fns";
 import { DeleteAlert } from "@/components/delete-alert";
+import { deleteUser } from "@/actions/delete-user";
 
 export const columns: ColumnDef<User>[] = [
+  {
+    accessorKey: "id",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="ID" />
+    ),
+    cell: ({ row }) => <div className="w-[80px] truncate">{row.getValue("id")}</div>,
+    enableHiding: false,
+    enableSorting:false
+  },
   {
     accessorKey: "email",
     header: ({ column }) => (
@@ -41,7 +50,9 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       return (
         <span className="truncate font-medium">
-          {format(row.getValue("lastSignIn"), "LLL dd, y")}
+          {row.getValue("lastSignIn")
+            ? format(row.getValue("lastSignIn"), "LLL dd, y")
+            : "_"}
         </span>
       );
     },
@@ -53,8 +64,8 @@ export const columns: ColumnDef<User>[] = [
     id: "actions",
     cell: ({ row }) => (
       <DeleteAlert
-        onDelete={()=>{
-          console.log("deleting the user",row.getValue("email"))
+        onDelete={async () => {
+          await deleteUser(row.getValue("id"));
         }}
         title="Are you absolutely sure?"
         description="This action cannot be undone. This will permanently delete this user."

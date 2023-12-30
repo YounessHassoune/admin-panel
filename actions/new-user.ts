@@ -4,6 +4,7 @@ import { RoleType } from "@/constants";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import { generate } from "generate-password";
+import { revalidatePath } from "next/cache";
 
 export async function createNewUser(data: { email: string; role: RoleType }) {
   const cookieStore = cookies();
@@ -13,7 +14,7 @@ export async function createNewUser(data: { email: string; role: RoleType }) {
     numbers: true,
     symbols: true,
   });
-  console.log({password});
+  console.log({ password });
   const result = await supabase.auth.signUp({
     email: data.email,
     password,
@@ -23,6 +24,7 @@ export async function createNewUser(data: { email: string; role: RoleType }) {
       },
     },
   });
-  //if user is created mail this to the user
+  revalidatePath("/users");
+  // !!if user is created mail this to the user
   return result;
 }

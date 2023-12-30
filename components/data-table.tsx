@@ -27,7 +27,7 @@ import { DataTableToolbar } from "@/components/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data: TData[] ;
   filterColumn: keyof TData;
   newHref:string
 }
@@ -37,7 +37,7 @@ export function DataTable<TData, TValue>({
   data,
   filterColumn,
   newHref
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData , TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});

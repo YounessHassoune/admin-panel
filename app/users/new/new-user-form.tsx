@@ -40,8 +40,7 @@ export function NewUserForm() {
   });
 
   const onSubmit = async (values: NewUserType) => {
-    const { error,data } = await createNewUser(values);
-    console.log({error,data})
+    const { error, data } = await createNewUser(values);
     if (error?.message) {
       toast({
         variant: "destructive",
