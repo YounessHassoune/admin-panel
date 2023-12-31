@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { endOfMonth, format, startOfMonth } from "date-fns";
+import { format } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
@@ -9,13 +9,16 @@ import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
+interface CalendarDateRangePickerProps {
+  className?: React.HTMLAttributes<HTMLDivElement>;
+  date: DateRange | undefined;
+  setDate: (date: DateRange | undefined) => void;
+}
 export function CalendarDateRangePicker({
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: startOfMonth(new Date()),
-    to: endOfMonth(new Date()),
-  });
+  date,
+  setDate,
+}: CalendarDateRangePickerProps) {
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>

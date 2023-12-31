@@ -1,5 +1,10 @@
 "use client";
 
+import { createClient } from "@/lib/supabase/client";
+import { addDays, differenceInDays } from "date-fns";
+import { format } from "date-fns";
+import React, { useEffect } from "react";
+import { DateRange } from "react-day-picker";
 import {
   CartesianGrid,
   Legend,
@@ -11,52 +16,46 @@ import {
   YAxis,
 } from "recharts";
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+interface BusinessOverviewProps {
+  date: DateRange | undefined;
+}
+export function BusinessOverview({ date }: BusinessOverviewProps) {
+  const [data, setData] = React.useState<
+    { date: string; business: number | undefined }[]
+  >([]);
 
-export function BusinessOverview() {
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await supabase
+        .from("business")
+        .select("*")
+        .filter("created_at", "gte", date?.from?.toISOString())
+        .filter("created_at", "lte", date?.to?.toISOString());
+      console.log({ data });
+
+      const daysDifference = differenceInDays(date?.to!, date?.from!);
+      console.log(daysDifference);
+
+      const businessCountArray = Array.from(
+        {
+          length: daysDifference + 1,
+        },
+        (_, index) => {
+          const currentDate = addDays(date?.from!, index);
+          const currentDateISO = format(currentDate, "yyyy-MM-dd");
+          const count = data?.filter(
+            (item) => item.created_at.split("T")[0] === currentDateISO
+          ).length;
+          return { date: format(currentDateISO, "dd"), business: count };
+        }
+      );
+      setData(businessCountArray);
+    };
+    getData();
+  }, [date]);
+
   return (
     <ResponsiveContainer width="100%" height={400}>
       <LineChart
@@ -71,13 +70,13 @@ export function BusinessOverview() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis dataKey="date" />
+        <YAxis allowDecimals={false} />
         <Tooltip />
         <Legend />
         <Line
           type="monotone"
-          dataKey="pv"
+          dataKey="business"
           stroke="#8884d8"
           activeDot={{ r: 8 }}
         />
