@@ -1,6 +1,6 @@
 "use client";
-import { Table } from "@tanstack/react-table";
 
+import { Table } from "@tanstack/react-table";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { XIcon, UserPlusIcon } from "lucide-react";
@@ -11,38 +11,31 @@ import useAdmin from "@/hooks/use-admin";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
-  filterColumn: keyof TData;
-  newHref: string;
 }
 
-export function DataTableToolbar<TData>({
+export function UserTableToolbar<TData>({
   table,
-  filterColumn,
-  newHref,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
   const isAdmin = useAdmin();
-  
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder="Filter User..."
-          value={
-            (table
-              .getColumn(filterColumn.toString())
-              ?.getFilterValue() as string) ?? ""
-          }
+          placeholder="Filter Users ..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table
-              .getColumn(filterColumn.toString())
-              ?.setFilterValue(event.target.value)
+            table.getColumn("email")?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
 
         {!isAdmin && (
-          <Link href={newHref} className={cn(buttonVariants(), "flex gap-2")}>
+          <Link
+            href="/users/new"
+            className={cn(buttonVariants(), "flex gap-2")}
+          >
             <UserPlusIcon className=" h-4 w-4" />
             New User
           </Link>

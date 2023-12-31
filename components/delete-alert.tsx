@@ -13,6 +13,7 @@ import {
 import { TrashIcon } from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import useAdmin from "@/hooks/use-admin";
+import { usePathname } from "next/navigation";
 
 interface DeleteAlertProps {
   title: string;
@@ -27,12 +28,13 @@ export function DeleteAlert({
 }: DeleteAlertProps) {
   const { toast } = useToast();
   const isAdmin = useAdmin();
+  const pathname = usePathname();
 
   const ShowToast = () => {
     toast({
       variant: "destructive",
       title: "Uh oh! Something went wrong.",
-      description: "You don't have the permission to delete this user",
+      description: "You don't have the permission to delete this row",
     });
   };
 
@@ -48,7 +50,9 @@ export function DeleteAlert({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={isAdmin ? ShowToast : onDelete}>
+          <AlertDialogAction
+            onClick={isAdmin && pathname === "/users" ? ShowToast : onDelete}
+          >
             Continue
           </AlertDialogAction>
         </AlertDialogFooter>

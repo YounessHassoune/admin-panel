@@ -1,7 +1,15 @@
 import { Separator } from "@/components/ui/separator";
 import { NewBusinessForm } from "./new-business";
+import { redirect } from "next/navigation";
+import { userSession } from "@/actions/user-session";
 
-export default function NewBusiness() {
+export default async function NewBusiness() {
+  const {
+    data: { session },
+  } = await userSession();
+  if (!session) {
+    redirect("/login");
+  }
   return (
     <div className="flex flex-col justify-center gap-3 m-auto">
       <div>

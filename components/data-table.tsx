@@ -23,20 +23,19 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { DataTableToolbar } from "@/components/data-table-toolbar";
+import { UserTableToolbar } from "@/app/users/components/user-table-toolbar";
+import { BusinessTableToolbar } from "@/app/business/components/business-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  filterColumn: keyof TData;
-  newHref: string;
+  name: "businesses" | "users";
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  filterColumn,
-  newHref,
+  name,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -70,11 +69,11 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar
-        table={table}
-        filterColumn={filterColumn}
-        newHref={newHref}
-      />
+      {name === "users" ? (
+        <UserTableToolbar table={table} />
+      ) : (
+        <BusinessTableToolbar table={table} />
+      )}
       <div className="rounded-md border">
         <Table>
           <TableHeader>

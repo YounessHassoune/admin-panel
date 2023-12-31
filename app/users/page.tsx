@@ -19,12 +19,7 @@ export default async function Users() {
       <div className="flex items-center justify-between space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">Users</h2>
       </div>
-      <DataTable
-        data={users}
-        columns={columns}
-        filterColumn="email"
-        newHref="/users/new"
-      />
+      <DataTable data={users} columns={columns} name="users" />
     </div>
   );
 }

@@ -6,6 +6,8 @@ import { DataTableColumnHeader } from "@/components/data-table-column-header";
 import { format } from "date-fns";
 import { DeleteAlert } from "@/components/delete-alert";
 import { deleteUser } from "@/actions/delete-user";
+import useAdmin from "@/hooks/use-admin";
+
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -37,9 +39,7 @@ export const columns: ColumnDef<User>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <span className="truncate font-medium">
-          {row.getValue("role")}
-        </span>
+        <span className="truncate font-medium">{row.getValue("role")}</span>
       );
     },
     filterFn: (row, id, value) => {
