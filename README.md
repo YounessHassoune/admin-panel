@@ -54,6 +54,18 @@ This project is an admin panel built using Next.js and supabase that allows mana
 
 [Live Preview Link](https://admin-panel-ten-gray.vercel.app/login)
 
+To access the live preview of the application, please use the following login credentials:
+
+### SuperAdmin Account
+
+- **Email:** superadmin@admin.com
+- **Password:** 123456
+
+### Admin Account
+
+- **Email:** admin@admin.com
+- **Password:** 654321
+
 ## Creator
 
 - **Name:** Youness Hassoune
