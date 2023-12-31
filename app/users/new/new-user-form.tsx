@@ -55,7 +55,10 @@ export function NewUserForm() {
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-72 sm:w-full space-y-8"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -80,7 +83,7 @@ export function NewUserForm() {
                   <select
                     className={cn(
                       buttonVariants({ variant: "outline" }),
-                      "w-full appearance-none font-normal"
+                      "w-full appearance-none font-normal",
                     )}
                     {...field}
                   >

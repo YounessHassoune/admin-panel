@@ -26,5 +26,3 @@ export type ShapeProps = {
   percent: number;
   value: number;
 };
-
-

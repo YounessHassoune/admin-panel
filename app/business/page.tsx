@@ -5,10 +5,8 @@ import { redirect } from "next/navigation";
 import { columns } from "./components/columns";
 import { Metadata } from "next";
 
-
 export const metadata: Metadata = {
   title: "Business Page",
-  description: "Manage your admins and business",
 };
 
 export default async function Business() {

@@ -17,9 +17,9 @@ export default async function NewBusiness() {
   }
   return (
     <div className="flex flex-col justify-center gap-3 m-auto">
-      <div>
+      <div className="flex flex-col justify-center items-center">
         <h3 className="text-lg font-medium">Create New Business</h3>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground text-center">
           You can create new businesses.
         </p>
       </div>

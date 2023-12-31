@@ -23,7 +23,7 @@ export function Charts({ usersOverview }: ChartsProps) {
       <Card className="col-auto overflow-x-auto">
         <CardHeader className="flex lg:flex-row lg:items-center justify-between gap-3 md:gap-2">
           <CardTitle>Business</CardTitle>
-          <CalendarDateRangePicker date={date} setDate={setDate}  className=""/>
+          <CalendarDateRangePicker date={date} setDate={setDate} className="" />
         </CardHeader>
         <CardContent className="pl-2">
           <BusinessOverview date={date} />

@@ -34,14 +34,14 @@ const newBusinessUSchema = z.object({
     .refine((files) => files.length > 0, `Required`)
     .refine(
       (files) => Array.from(files).every((file) => file.size <= MAX_IMAGE_SIZE),
-      `Each file size should be less than 5 MB.`
+      `Each file size should be less than 5 MB.`,
     )
     .refine(
       (files) =>
         Array.from(files).every((file) =>
-          ALLOWED_IMAGE_TYPES.includes(file.type)
+          ALLOWED_IMAGE_TYPES.includes(file.type),
         ),
-      "Only these types are allowed .jpg, .jpeg, .png and .webp"
+      "Only these types are allowed .jpg, .jpeg, .png and .webp",
     ),
 });
 
@@ -84,7 +84,7 @@ export function NewBusinessForm() {
 
     // Add newly uploaded images
     Array.from(event.target.files!).forEach((image) =>
-      dataTransfer.items.add(image)
+      dataTransfer.items.add(image),
     );
 
     const files = dataTransfer.files;
@@ -99,7 +99,7 @@ export function NewBusinessForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full  space-y-8"
+        className="w-72 sm:w-full space-y-8"
       >
         {form.formState.dirtyFields.image &&
           form.formState.touchedFields.image &&

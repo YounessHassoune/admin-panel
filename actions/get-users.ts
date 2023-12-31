@@ -18,7 +18,7 @@ export async function getUsers() {
   // filter user depending on the role
   const transformedUsers = users
     .filter((user) =>
-      role === "Admin" ? user.user_metadata?.user_role === "Admin" : true
+      role === "Admin" ? user.user_metadata?.user_role === "Admin" : true,
     )
     .map((user) => ({
       id: user.id,

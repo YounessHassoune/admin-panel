@@ -8,7 +8,6 @@ import { DeleteAlert } from "@/components/delete-alert";
 import { deleteUser } from "@/actions/delete-user";
 import useAdmin from "@/hooks/use-admin";
 
-
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "id",

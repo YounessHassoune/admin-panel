@@ -26,7 +26,7 @@ export async function getUsersOverview() {
       }
       return count;
     },
-    { admins: 0, superAdmins: 0 }
+    { admins: 0, superAdmins: 0 },
   );
   const data = [
     { name: "Admin", value: userCounts.admins },

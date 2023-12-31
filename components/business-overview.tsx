@@ -24,20 +24,17 @@ export function BusinessOverview({ date }: BusinessOverviewProps) {
     { date: string; business: number | undefined }[]
   >([]);
 
-  const supabase = createClient();
-
   useEffect(() => {
+    const supabase = createClient();
+
     const getData = async () => {
       const { data } = await supabase
         .from("business")
         .select("*")
         .filter("created_at", "gte", date?.from?.toISOString())
         .filter("created_at", "lte", date?.to?.toISOString());
-      console.log({ data });
 
       const daysDifference = differenceInDays(date?.to!, date?.from!);
-      console.log(daysDifference);
-
       const businessCountArray = Array.from(
         {
           length: daysDifference + 1,
@@ -46,10 +43,10 @@ export function BusinessOverview({ date }: BusinessOverviewProps) {
           const currentDate = addDays(date?.from!, index);
           const currentDateISO = format(currentDate, "yyyy-MM-dd");
           const count = data?.filter(
-            (item) => item.created_at.split("T")[0] === currentDateISO
+            (item) => item.created_at.split("T")[0] === currentDateISO,
           ).length;
           return { date: format(currentDateISO, "dd"), business: count };
-        }
+        },
       );
       setData(businessCountArray);
     };

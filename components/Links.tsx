@@ -7,7 +7,7 @@ export function Links() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center space-x-4 lg:space-x-6">
+    <nav className="hidden sm:flex items-center space-x-4 lg:space-x-6">
       <Link
         href="/dashboard"
         className={
