@@ -10,7 +10,7 @@ import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 interface CalendarDateRangePickerProps {
-  className?: React.HTMLAttributes<HTMLDivElement>;
+  className?: string;
   date: DateRange | undefined;
   setDate: (date: DateRange | undefined) => void;
 }

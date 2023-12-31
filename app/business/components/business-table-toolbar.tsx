@@ -19,19 +19,19 @@ export function BusinessTableToolbar<TData>({
 
   return (
     <div className="flex items-center justify-between">
-      <div className="flex flex-1 items-center space-x-2">
+      <div className="flex flex-1 flex-col justify-center items-center max-w-fit space-y-2 md:space-y-0 md:flex-row md:space-x-2">
         <Input
           placeholder="Filter Businesses ..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px]"
+          className="h-10 w-[150px] lg:w-[250px]"
         />
 
         <Link
           href="/business/new"
-          className={cn(buttonVariants(), "flex gap-2")}
+          className={cn(buttonVariants(), "flex gap-2 m-0")}
         >
           <UserPlusIcon className=" h-4 w-4" />
           New Business

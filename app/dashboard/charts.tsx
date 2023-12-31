@@ -20,10 +20,10 @@ export function Charts({ usersOverview }: ChartsProps) {
   });
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-      <Card className="col-auto">
-        <CardHeader className="flex md:flex-row justify-between items-center ">
+      <Card className="col-auto overflow-x-auto">
+        <CardHeader className="flex lg:flex-row lg:items-center justify-between gap-3 md:gap-2">
           <CardTitle>Business</CardTitle>
-          <CalendarDateRangePicker date={date} setDate={setDate} />
+          <CalendarDateRangePicker date={date} setDate={setDate}  className=""/>
         </CardHeader>
         <CardContent className="pl-2">
           <BusinessOverview date={date} />
