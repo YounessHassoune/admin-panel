@@ -2,6 +2,11 @@ import { userSession } from "@/actions/user-session";
 import { getUsersOverview } from "@/actions/users-overview";
 import { redirect } from "next/navigation";
 import { Charts } from "./charts";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard Page",
+};
 
 export default async function Dashboard() {
   const {

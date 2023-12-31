@@ -2,6 +2,11 @@ import { Separator } from "@/components/ui/separator";
 import { NewBusinessForm } from "./new-business";
 import { redirect } from "next/navigation";
 import { userSession } from "@/actions/user-session";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "New Business",
+};
 
 export default async function NewBusiness() {
   const {

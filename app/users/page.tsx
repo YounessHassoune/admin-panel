@@ -3,6 +3,11 @@ import { columns } from "./components/columns";
 import { userSession } from "@/actions/user-session";
 import { getUsers } from "@/actions/get-users";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Users Page",
+};
 
 export default async function Users() {
   const {
