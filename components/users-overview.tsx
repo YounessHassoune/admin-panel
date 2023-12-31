@@ -10,8 +10,8 @@ export function UsersOverview({ data }: UsersOverviewProps) {
     setActiveIndex(index);
   };
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <PieChart width={400} height={400}>
+    <ResponsiveContainer width="100%" height={500}>
+      <PieChart width={400} height={500}>
         <Pie
           activeIndex={activeIndex}
           activeShape={renderActiveShape}

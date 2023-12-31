@@ -26,7 +26,6 @@ export function BusinessOverview({ date }: BusinessOverviewProps) {
 
   useEffect(() => {
     const supabase = createClient();
-
     const getData = async () => {
       const { data } = await supabase
         .from("business")
@@ -54,10 +53,10 @@ export function BusinessOverview({ date }: BusinessOverviewProps) {
   }, [date]);
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={500}>
       <LineChart
         width={400}
-        height={400}
+        height={500}
         data={data}
         margin={{
           top: 5,
